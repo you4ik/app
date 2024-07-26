@@ -1,56 +1,63 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const app = express();
-const path = './orders.json';
+const { Pool } = require('pg');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
-
-app.get('/orders', (req, res) => {
-    fs.readFile(path, (err, data) => {
-        if (err) {
-            res.status(500).send('Error reading orders.json');
-            return;
-        }
-        res.send(data);
-    });
+// Настройки подключения к базе данных PostgreSQL
+const pool = new Pool({
+    user: 'default',
+    host: 'ep-spring-dream-58410209.eu-central-1.aws.neon.tech',
+    database: 'verceldb',
+    password: 'w9UuYScFEy3M',
+    port: 5432,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
-app.post('/orders', (req, res) => {
-    const { date, kol, sum, stop = 300, desc = "" } = req.body;
+// Пример функции для получения всех заказов
+async function getOrders() {
+    try {
+        const result = await pool.query('SELECT * FROM orders ORDER BY order_date');
+        return result.rows;
+    } catch (error) {
+        console.error('Error executing query', error.stack);
+        throw error;
+    }
+}
 
-    fs.readFile(path, (err, data) => {
-        if (err) {
-            res.status(500).send('Error reading orders.json');
-            return;
-        }
+// Пример функции для добавления нового заказа
+async function addOrder(order) {
+    const { order_date, kol, sum, stop, desc } = order;
+    try {
+        await pool.query(
+            'INSERT INTO orders (order_date, kol, sum, stop, "desc") VALUES ($1, $2, $3, $4, $5)',
+            [order_date, kol, sum, stop, desc]
+        );
+    } catch (error) {
+        console.error('Error executing query', error.stack);
+        throw error;
+    }
+}
 
-        let orderData;
-        try {
-            orderData = JSON.parse(data);
-        } catch (parseErr) {
-            res.status(500).send('Error parsing orders.json');
-            return;
-        }
+// Пример использования
+(async () => {
+    try {
+        // Получение всех заказов
+        const orders = await getOrders();
+        console.log('Orders:', orders);
 
-        if (!orderData[date]) {
-            orderData[date] = [];
-        }
-
-        orderData[date].push({ kol, sum, stop, desc });
-
-        fs.writeFile(path, JSON.stringify(orderData, null, 2), (writeErr) => {
-            if (writeErr) {
-                res.status(500).send('Error writing to orders.json');
-                return;
-            }
-            res.send('Order added successfully!');
+        // Добавление нового заказа
+        await addOrder({
+            order_date: '2024-07-26',
+            kol: 5,
+            sum: 2000,
+            stop: 300,
+            desc: 'New order'
         });
-    });
-});
 
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
-});
+        console.log('Order added successfully');
+    } catch (error) {
+        console.error('Error:', error);
+    } finally {
+        // Закрываем соединение с базой данных
+        await pool.end();
+    }
+})();
