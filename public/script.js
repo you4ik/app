@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderForm = document.getElementById('orderForm');
     const orderFormContainer = $('#orderFormContainer');
 
+    // Отправка формы
     orderForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -26,24 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 
+    // Загрузка заказов
     function loadOrders() {
         fetch('/orders')
             .then(response => response.json())
             .then(data => {
                 const ordersList = document.getElementById('ordersList');
                 ordersList.innerHTML = '';
-                for (let date in data) {
-                    const orders = data[date];
-                    orders.forEach(order => {
-                        const orderElement = document.createElement('div');
-                        orderElement.className = 'order-item';
-                        orderElement.textContent = `${date} - Kol: ${order.kol}, Sum: ${order.sum}, Stop: ${order.stop}, Desc: ${order.desc}`;
-                        ordersList.appendChild(orderElement);
-                    });
-                }
+                data.forEach(order => {
+                    const orderElement = document.createElement('div');
+                    orderElement.className = 'order-item';
+                    orderElement.textContent = `${order.date} - Kol: ${order.kol}, Sum: ${order.sum}, Stop: ${order.stop}, Desc: ${order.desc}`;
+                    ordersList.appendChild(orderElement);
+                });
             });
     }
 
+    // Показ и скрытие формы
     function showForm() {
         orderFormContainer.modal('show');
     }

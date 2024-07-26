@@ -1,63 +1,51 @@
-const { Pool } = require('pg');
+const express = require('express');
+const bodyParser = require('body-parser');
+const { Client } = require('pg');
 
-// Настройки подключения к базе данных PostgreSQL
-const pool = new Pool({
-    user: 'default',
-    host: 'ep-spring-dream-58410209.eu-central-1.aws.neon.tech',
-    database: 'verceldb',
-    password: 'w9UuYScFEy3M',
-    port: 5432,
-    ssl: {
-        rejectUnauthorized: false
+// Создаем экземпляр приложения Express
+const app = express();
+const port = 3000;
+
+// Настройка подключения к базе данных
+const client = new Client({
+    connectionString: 'postgres://default:w9UuYScFEy3M@ep-spring-dream-58410209.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require'
+});
+
+client.connect()
+    .then(() => console.log('Connected to PostgreSQL'))
+    .catch(err => console.error('Connection error', err.stack));
+
+// Настройка Express
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+// Получение заказов
+app.get('/orders', async (req, res) => {
+    try {
+        const result = await client.query('SELECT * FROM orders');
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Error fetching orders', err.stack);
+        res.status(500).send('Error fetching orders');
     }
 });
 
-// Пример функции для получения всех заказов
-async function getOrders() {
+// Добавление нового заказа
+app.post('/orders', async (req, res) => {
+    const { date, kol, sum, stop, desc } = req.body;
     try {
-        const result = await pool.query('SELECT * FROM orders ORDER BY order_date');
-        return result.rows;
-    } catch (error) {
-        console.error('Error executing query', error.stack);
-        throw error;
-    }
-}
-
-// Пример функции для добавления нового заказа
-async function addOrder(order) {
-    const { order_date, kol, sum, stop, desc } = order;
-    try {
-        await pool.query(
-            'INSERT INTO orders (order_date, kol, sum, stop, "desc") VALUES ($1, $2, $3, $4, $5)',
-            [order_date, kol, sum, stop, desc]
+        await client.query(
+            'INSERT INTO orders (date, kol, sum, stop, desc) VALUES ($1, $2, $3, $4, $5)',
+            [date, kol, sum, stop, desc]
         );
-    } catch (error) {
-        console.error('Error executing query', error.stack);
-        throw error;
+        res.send('Order added successfully');
+    } catch (err) {
+        console.error('Error adding order', err.stack);
+        res.status(500).send('Error adding order');
     }
-}
+});
 
-// Пример использования
-(async () => {
-    try {
-        // Получение всех заказов
-        const orders = await getOrders();
-        console.log('Orders:', orders);
-
-        // Добавление нового заказа
-        await addOrder({
-            order_date: '2024-07-26',
-            kol: 5,
-            sum: 2000,
-            stop: 300,
-            desc: 'New order'
-        });
-
-        console.log('Order added successfully');
-    } catch (error) {
-        console.error('Error:', error);
-    } finally {
-        // Закрываем соединение с базой данных
-        await pool.end();
-    }
-})();
+// Запуск сервера
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
