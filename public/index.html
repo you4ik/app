@@ -3,56 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
     <title>Orders App</title>
 </head>
 <body>
-<div class="container">
-    <h1>Orders App</h1>
-    <div id="ordersList"></div>
+<div class="container mt-4">
+    <h1 class="text-center">Orders App</h1>
+    <div id="ordersList" class="mt-4"></div>
 </div>
 
 <!-- Floating Form Button -->
-<div class="add-button">
-    <button id="showFormBtn">+</button>
+<div class="fixed-bottom d-flex justify-content-end p-3">
+    <button id="showFormBtn" class="btn btn-primary btn-lg rounded-circle">+</button>
 </div>
 
-<!-- Add Order Form -->
-<div id="orderFormContainer" class="form-container">
-    <form id="orderForm">
-        <label for="date">Date:</label>
-        <input type="text" id="date" name="date" required>
-        <label for="kol">Kol:</label>
-        <input type="number" id="kol" name="kol" required>
-        <label for="sum">Sum:</label>
-        <input type="number" id="sum" name="sum" required>
-        <label for="stop">Stop:</label>
-        <input type="number" id="stop" name="stop" value="300">
-        <label for="desc">Desc:</label>
-        <input type="text" id="desc" name="desc">
-        <button type="submit">Add Order</button>
-        <button type="button" id="cancelFormBtn">Cancel</button>
-    </form>
+<!-- Add Order Form (Modal) -->
+<div id="orderFormContainer" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="text" id="date" name="date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kol">Kol:</label>
+                        <input type="number" id="kol" name="kol" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sum">Sum:</label>
+                        <input type="number" id="sum" name="sum" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stop">Stop:</label>
+                        <input type="number" id="stop" name="stop" class="form-control" value="300">
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Desc:</label>
+                        <input type="text" id="desc" name="desc" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Order</button>
+                    <button type="button" id="cancelFormBtn" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Bottom Menu -->
-<div class="bottom-menu">
-    <button id="homeBtn">Home</button>
-    <button id="addOrderBtn">Add Order</button>
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-bottom">
+    <div class="container">
+        <button id="homeBtn" class="btn btn-light text-primary">Home</button>
+        <button id="addOrderBtn" class="btn btn-light text-primary">Add Order</button>
+    </div>
+</nav>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="script.js"></script>
-<script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-            .then(registration => {
-                console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch(error => {
-                console.log('Service Worker registration failed:', error);
-            });
-    }
-</script>
 </body>
 </html>
