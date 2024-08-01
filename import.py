@@ -28,7 +28,7 @@ cursor = conn.cursor()
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS orders (
         id SERIAL PRIMARY KEY,
-        order_date DATE NOT NULL,
+        date DATE NOT NULL,
         kol INT NOT NULL,
         sum INT NOT NULL,
         stop INT NOT NULL,
@@ -53,7 +53,7 @@ for date_str, orders in data.items():
             desc = order.get('desc', '')
 
             cursor.execute("""
-                INSERT INTO orders (order_date, kol, sum, stop, "desc")
+                INSERT INTO orders (date, kol, sum, stop, "desc")
                 VALUES (%s, %s, %s, %s, %s);
             """, (order_date, kol, sum, stop, desc))
 
