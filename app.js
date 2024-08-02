@@ -22,7 +22,7 @@ app.use(express.static('public'));
 // Получение заказов
 app.get('/orders', async (req, res) => {
     try {
-        const result = await client.query('SELECT * FROM orders');
+        const result = await client.query('SELECT * FROM orders ORDER BY date DESC');
         res.json(result.rows);
     } catch (err) {
         console.error('Error fetching orders', err.stack);
