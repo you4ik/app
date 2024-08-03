@@ -35,8 +35,8 @@ app.set('layout', 'layout'); // Ensure this matches your layout file name
 
 app.get('/', async (req, res) => {
     try {
-      const result = await client.query('SELECT * FROM orders ORDER BY date DESC, id DESC');
-      console.log(result.rows); // Log the results to check what is being retrieved
+      const result = await client.query('SELECT * FROM orders  ORDER BY date DESC, id DESC LIMIT 10');
+     // console.log(result.rows); // Log the results to check what is being retrieved
   
       // Render the orders.ejs as a string
       const ordersHtml = await ejs.renderFile(path.join(__dirname, 'views', 'orders.ejs'), { orders: result.rows }, { async: true });
