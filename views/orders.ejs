@@ -1,0 +1,88 @@
+ <!-- header starts -->
+    <header id="header" class="main-header inner-page-header">
+        <div class="custom-container">
+            <div class="header-panel">
+                <a href="setting.html">
+                    <i class="iconsax icon-btn" data-icon="chevron-left"> </i>
+                </a>
+                <h3>My kjbk</h3>
+            </div>
+        </div>
+    </header>
+    <!-- header end -->
+
+    <!-- wallet section starts -->
+    <section class="section-b-space">
+        <div class="custom-container">
+            <div class="balance-background">
+                <div class="balance-details">
+                    <div>
+                        <h6>Total Balancekjnkjnkdsfjjh</h6>
+                        <h4 class="mt-2">$3,263.03</h4>
+                    </div>
+                    <a href="#reasons" data-bs-toggle="offcanvas" class="btn theme-btn balance-btn mt-0">Topup Wallet</a>
+                </div>
+            </div>
+
+            <ul class="nav nav-pills my-ride-tab w-100 border-0 mt-4" id="Tab" role="tablist">
+                <li class="nav-item  w-50" role="presentation">
+                    <button class="nav-link active" id="pill-trip-tab" data-bs-toggle="pill" data-bs-target="#trip-tab">Trip</button>
+                </li>
+                <li class="nav-item  w-50" role="presentation">
+                    <button class="nav-link" id="pill-withdraw-tab" data-bs-toggle="pill" data-bs-target="#withdraw-tab">Withdraw</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="TabContent">
+                <div class="tab-pane fade active show" id="trip-tab">
+                    <ul class="earning-list">
+                        <% orders.forEach(order => { %>
+                        <li data-bs-toggle="offcanvas" data-bs-target="#reasons" data-id="<%= order.id %>">
+                            <div class="earning-box">
+                                <i class="fi fi-sr-square-<%= order.kol %> fs-1 mt-1" ></i>
+                                <div class="earning-content">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <a href="ride-details.html">
+                                            <h6 class="title-color fw-normal"><%= order.client %></h6>
+                                        </a>
+                                        <h5 class="fw-semibold success-color">$<%= order.sum %></h5>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mt-1">
+                                        <h6 class="fw-normal content-color">#<%= new Date(order.date).toLocaleDateString() %></h6>
+                                        <h6 class="fw-normal content-color"><%= order.stop %>SEK</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <% }); %>
+                    </ul>
+                </div>
+
+                <div class="tab-pane fade" id="withdraw-tab">
+                    <ul class="earning-list">
+                        <!-- Add your withdraw items here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- wallet section starts -->
+
+ <!-- reasons offcanvas starts -->
+
+<div class="offcanvas offcanvas-bottom ride-offcanvas" tabindex="-1" id="reasons">
+    <div class="offcanvas-body p-0">
+        <div class="alert-part">
+            <div class="title-content">
+                <h3>Why do you want to cancel?</h3>
+            </div>
+            <div id="offcanvas-content">
+            hgjg
+            </div>
+            <div class="mt-5">
+                <a data-bs-dismiss="offcanvas" href="#" class="btn theme-btn w-100 mt-0">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- reasons offcanvas end -->
