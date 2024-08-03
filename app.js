@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 
 const express = require('express');
 const { Client } = require('pg');
@@ -10,7 +10,6 @@ const ejs = require('ejs');
 
 // Create Express app
 const app = express();
-const port = process.env.PORT || 3000;
 
 const client = new Client({
     connectionString: process.env.DATABASE_URL
@@ -19,11 +18,11 @@ const client = new Client({
 client.connect()
   .then(() => console.log('Connected to PostgreSQL'))
   .catch(err => console.error('Connection error', err.stack));
-
-// Express configuration
+// Serve static files from the "public" directory
 app.use(express.json()); // Replaces bodyParser.json()
 app.use(express.urlencoded({ extended: true })); // Replaces bodyParser.urlencoded()
-app.use(express.static('public'));
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
