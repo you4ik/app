@@ -3,15 +3,15 @@ const { Client } = require('pg');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const ejs = require('ejs');
+require('dotenv').config();
 
 
 // Create Express app
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// Database connection
 const client = new Client({
-  connectionString: 'postgres://default:w9UuYScFEy3M@ep-spring-dream-58410209.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require'
+    connectionString: process.env.DATABASE_URL
 });
 
 client.connect()
