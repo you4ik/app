@@ -1,9 +1,11 @@
+require('dotenv').config();
+
 const express = require('express');
 const { Client } = require('pg');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const ejs = require('ejs');
-require('dotenv').config();
+
 
 
 // Create Express app
