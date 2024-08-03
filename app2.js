@@ -23,7 +23,7 @@ async function main() {
     // Преобразуем текстовое поле в формат DATE для сравнения
     const query = `
       SELECT * FROM orders 
-      WHERE TO_DATE(date, 'DD.MM.YYYY') BETWEEN $1 AND $2
+      WHERE date BETWEEN $1 AND $2 order by date asc
     `;
     const res = await client.query(query, [startDate, endDate]);
     console.log('Data from database for date range:', res.rows); // Проверка данных
