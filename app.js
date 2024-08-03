@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { Client } = require('pg');
+const path = require('path');
 
 // Создаем экземпляр приложения Express
 const app = express();
@@ -19,14 +20,32 @@ client.connect()
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// Получение заказов
-app.get('/orders', async (req, res) => {
+// Устанавливаем EJS в качестве шаблонизатора
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+
+
+// Route for fetching and displaying orders
+app.get('/', async (req, res) => {
     try {
         const result = await client.query('SELECT * FROM orders ORDER BY date DESC');
-        res.json(result.rows);
+        res.render('index', { orders: result.rows });
     } catch (err) {
         console.error('Error fetching orders', err.stack);
         res.status(500).send('Error fetching orders');
+    }
+});
+app.get('/get-data/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        // Fetch data from the database using the ID
+        const result = await client.query('SELECT * FROM orders WHERE id = $1', [id]);
+        res.json(result.rows[0]);  // Send the fetched data as JSON
+    } catch (err) {
+        console.error('Error fetching data:', err.stack);
+        res.status(500).send('Error fetching data');
     }
 });
 

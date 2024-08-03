@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="taxify">
+    <meta name="keywords" content="taxify">
+    <meta name="author" content="taxify">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="https://themes.pixelstrap.com/pwa/taxify/images/logo/favicon.png" type="image/x-icon">
+    <title>Taxify - Driver App</title>
+    <link rel="apple-touch-icon" href="https://themes.pixelstrap.com/pwa/taxify/images/logo/favicon.png">
+    <meta name="title-color" content="#01AA85">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="taxify">
+    <meta name="msapplication-TileImage" content="https://themes.pixelstrap.com/pwa/taxify/images/logo/favicon.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.5.1/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <!-- iconsax css -->
+    <link rel="stylesheet" type="text/css" href="http://localhost:3000/iconsax.css">
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" id="rtl-link" type="text/css" href="http://localhost:3000/bootstrap.css">
+
+    <!-- Theme css -->
+    <link rel="stylesheet" id="change-link" type="text/css" href="http://localhost:3000/style.css">
+</head>
+
+<body>
+    
+    <!-- header starts -->
+    <header id="header" class="main-header inner-page-header">
+        <div class="custom-container">
+            <div class="header-panel">
+                <a href="setting.html">
+                    <i class="iconsax icon-btn" data-icon="chevron-left"> </i>
+                </a>
+                <h3>My kjbk</h3>
+            </div>
+        </div>
+    </header>
+    <!-- header end -->
+
+    <!-- wallet section starts -->
+    <section class="section-b-space">
+        <div class="custom-container">
+            <div class="balance-background">
+                <div class="balance-details">
+                    <div>
+                        <h6>Total Balancekjnkjnkdsfjjh</h6>
+                        <h4 class="mt-2">$3,263.03</h4>
+                    </div>
+                    <a href="#reasons" data-bs-toggle="offcanvas" class="btn theme-btn balance-btn mt-0">Topup Wallet</a>
+                </div>
+            </div>
+
+            <ul class="nav nav-pills my-ride-tab w-100 border-0 mt-4" id="Tab" role="tablist">
+                <li class="nav-item  w-50" role="presentation">
+                    <button class="nav-link active" id="pill-trip-tab" data-bs-toggle="pill" data-bs-target="#trip-tab">Trip</button>
+                </li>
+                <li class="nav-item  w-50" role="presentation">
+                    <button class="nav-link" id="pill-withdraw-tab" data-bs-toggle="pill" data-bs-target="#withdraw-tab">Withdraw</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="TabContent">
+                <div class="tab-pane fade active show" id="trip-tab">
+                    <ul class="earning-list">
+                        <% orders.forEach(order => { %>
+                        <li data-bs-toggle="offcanvas" data-bs-target="#reasons" data-id="<%= order.id %>">
+                            <div class="earning-box">
+                                <i class="fi fi-sr-square-<%= order.kol %> fs-1 mt-1" ></i>
+                                <div class="earning-content">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <a href="ride-details.html">
+                                            <h6 class="title-color fw-normal"><%= order.client %></h6>
+                                        </a>
+                                        <h5 class="fw-semibold success-color">$<%= order.sum %></h5>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mt-1">
+                                        <h6 class="fw-normal content-color">#<%= new Date(order.date).toLocaleDateString() %></h6>
+                                        <h6 class="fw-normal content-color"><%= order.stop %>SEK</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <% }); %>
+                    </ul>
+                </div>
+
+                <div class="tab-pane fade" id="withdraw-tab">
+                    <ul class="earning-list">
+                        <!-- Add your withdraw items here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- wallet section starts -->
+
+ <!-- reasons offcanvas starts -->
+<!-- Offcanvas element -->
+<div class="offcanvas offcanvas-bottom ride-offcanvas" tabindex="-1" id="reasons">
+    <div class="offcanvas-body p-0">
+        <div class="alert-part">
+            <div class="title-content">
+                <h3>Why do you want to cancel?</h3>
+            </div>
+            <div id="offcanvas-content">
+            hgjg
+            </div>
+            <div class="mt-5">
+                <a data-bs-dismiss="offcanvas" href="#" class="btn theme-btn w-100 mt-0">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- reasons offcanvas end -->
+
+    <!-- panel-space start -->
+    <section class="panel-space"></section>
+    <!-- panel-space end -->
+
+    <!-- bottom navbar start -->
+    <div class="navbar-menu">
+        <ul>
+            <li>
+                <a href="home.html">
+                    <div class="icon">
+                        <img class="unactive" src="../images/svg/home.svg" alt="home">
+                        <img class="active" src="../images/svg/home-fill.svg" alt="home">
+                    </div>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="active-ride.html">
+                    <div class="icon">
+                        <img class="unactive" src="../images/svg/driving.svg" alt="driving">
+                        <img class="active" src="../images/svg/driving-fill.svg" alt="driving">
+                    </div>
+                    <span>Active Ride</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="my-rides.html">
+                    <div class="icon">
+                        <img class="unactive" src="../images/svg/car.svg" alt="car">
+                        <img class="active" src="../images/svg/car-fill.svg" alt="car">
+                    </div>
+                    <span>My Rides</span>
+                </a>
+            </li>
+
+            <li 
+            <!-- bottom navbar start -->
+            <div class="navbar-menu">
+                <ul>
+                    <li class="active">
+                        <a href="home.html">
+                            <div class="icon">
+                                <img class="unactive" src="../images/svg/home.svg" alt="home">
+                                <img class="active" src="../images/svg/home-fill.svg" alt="home">
+                            </div>
+                            <span>Home</span>
+                        </a>
+                    </li>
+        
+                    <li>
+                        <a href="active-ride.html">
+                            <div class="icon">
+                                <img class="unactive" src="../images/svg/driving.svg" alt="driving">
+                                <img class="active" src="../images/svg/driving-fill.svg" alt="driving">
+                            </div>
+                            <span>Active Ride</span>
+                        </a>
+                    </li>
+        
+                    <li>
+                        <a href="my-rides.html">
+                            <div class="icon">
+                                <img class="unactive" src="../images/svg/car.svg" alt="car">
+                                <img class="active" src="../images/svg/car-fill.svg" alt="car">
+                            </div>
+                            <span>My Rides</span>
+                        </a>
+                    </li>
+        
+                    <li class="active">
+                        <a href="setting.html">
+                            <div class="icon">
+                                <img class="unactive" src="../images/svg/setting.svg" alt="setting">
+                                <img class="active" src="../images/svg/setting-fill.svg" alt="setting">
+                            </div>
+                            <span class="active">Setting</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- bottom navbar end -->>
+                <a href="setting.html">
+                    <div class="icon">
+                        <img class="unactive" src="../images/svg/setting.svg" alt="setting">
+                        <img class="active" src="../images/svg/setting-fill.svg" alt="setting">
+                    </div>
+                    <span class="active">Setting</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- bottom navbar end -->
+    <!-- iconsax js -->
+    <script src="/iconsax.js"></script>
+
+    <!-- bootstrap js -->
+    <script src="/bootstrap.bundle.min.js"></script>
+
+    <!-- sticky-header js -->
+    <script src="/sticky-header.js"></script>
+
+    <!-- template-setting js -->
+    <script src="/template-setting.js"></script>
+
+    <!-- script js -->
+    <script src="/script.js"></script>
+    <script id="__bs_script__">//<![CDATA[
+        (function() {
+          try {
+            var script = document.createElement('script');
+            if ('async') {
+              script.async = true;
+            }
+            script.src = 'http://HOST:3001/browser-sync/browser-sync-client.js?v=3.0.2'.replace("HOST", location.hostname);
+            if (document.body) {
+              document.body.appendChild(script);
+            } else if (document.head) {
+              document.head.appendChild(script);
+            }
+          } catch (e) {
+            console.error("Browsersync: could not append script tag", e);
+          }
+        })()
+
+        
+      //]]></script>
+</body>
+
+</html>

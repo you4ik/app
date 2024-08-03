@@ -12,5 +12,9 @@
             "name": "lk",
             "connectString": "postgres://default:w9UuYScFEy3M@ep-spring-dream-58410209.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require"
         }
-    ]
+    ],
+    "workbench.editor.enablePreviewFromCodeNavigation": true,
+    "livePreview.customExternalBrowser": "Default",
+    "livePreview.debugOnExternalPreview": true,
+    "livePreview.openPreviewTarget": "Embedded Preview"
 }

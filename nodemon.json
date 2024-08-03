@@ -1,0 +1,9 @@
+{
+    "watch": ["views", "public", "app.js"],
+    "ext": "js ejs css html",
+    "exec": "node app.js",
+    "env": {
+      "NODE_ENV": "development"
+    }
+  }
+  
