@@ -50,6 +50,28 @@ app.get('/', async (req, res) => {
     }
   });
   
+// Route to fetch and display a specific order
+app.get('/order/:id', async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const result = await client.query('SELECT * FROM orders WHERE id = $1', [id]);
+  
+      if (result.rows.length === 0) {
+        return res.status(404).send('Order not found');
+      }
+  
+      res.render('order', {
+        title: `Order Details - ${id}`,
+        order: result.rows[0]
+      });
+    } catch (err) {
+      console.error('Error fetching order details', err.stack);
+      res.status(500).send('Error fetching order details');
+    }
+  });
+
+
 // Define other routes as needed...
 
 // Start server

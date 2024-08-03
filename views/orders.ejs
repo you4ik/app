@@ -37,14 +37,15 @@
                 <div class="tab-pane fade active show" id="trip-tab">
                     <ul class="earning-list">
                         <% orders.forEach(order => { %>
-                        <li data-bs-toggle="offcanvas" data-bs-target="#reasons" data-id="<%= order.id %>">
+                       <li  data-id="<%= order.id %>">
+                        <a href="/order/<%= order.id %>" style="text-decoration: none; color: inherit;">
                             <div class="earning-box">
-                                <i class="fi fi-sr-square-<%= order.kol %> fs-1 mt-1" ></i>
+                               <i class="fi fi-sr-square-<%= order.kol %> fs-1 mt-1" ></i>
                                 <div class="earning-content">
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <a href="ride-details.html">
+                                      
                                             <h6 class="title-color fw-normal"><%= order.client %></h6>
-                                        </a>
+                                      
                                         <h5 class="fw-semibold success-color">$<%= order.sum %></h5>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-1">
@@ -53,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
+                     </a>   </li>
                         <% }); %>
                     </ul>
                 </div>
