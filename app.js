@@ -6,9 +6,8 @@ const ejs = require('ejs');
 
 // Database Configuration
 const client = new Client({
-  connectionString: process.env.DATABASE_URL
+  connectionString: 'postgres://default:w9UuYScFEy3M@ep-spring-dream-58410209.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require' 
 });
-
 // Connect to Database
 (async () => { 
   try {
@@ -22,7 +21,7 @@ const client = new Client({
 
 // Express App Setup
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 // Middleware
 app.use(express.json());
