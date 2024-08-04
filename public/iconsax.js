@@ -13,7 +13,10 @@ function init_iconsax() {
       })
       .then((n_n) => {
         iconsax.innerHTML = n_n;
-        if (iconsax.querySelectorAll("[http-equiv='Content-Security-Policy']").length) {
+        if (
+          iconsax.querySelectorAll("[http-equiv='Content-Security-Policy']")
+            .length
+        ) {
           iconsax.innerHTML = "";
         }
       });

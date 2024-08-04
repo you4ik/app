@@ -54,32 +54,33 @@ window.addEventListener("load", () => {
       background-position: center;
       background-repeat: no-repeat;
       display: block;
-      `
+      `,
     );
   }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Select all buttons that open the offcanvas
-  const buttons = document.querySelectorAll('button[data-bs-target="#reasons"]');
+  const buttons = document.querySelectorAll(
+    'button[data-bs-target="#reasons"]',
+  );
 
-  buttons.forEach(button => {
-      button.addEventListener('click', function() {
-          // Get the ID from the data-id attribute
-          const id = this.getAttribute('data-id');
+  buttons.forEach((button) => {
+    button.addEventListener("click", function () {
+      // Get the ID from the data-id attribute
+      const id = this.getAttribute("data-id");
 
-          // Fetch data and update the offcanvas content
-          fetch(`/get-data/${id}`)
-              .then(response => response.json())
-              .then(data => {
-                  // Update the offcanvas content
-                  document.getElementById('offcanvas-content').innerHTML = `
+      // Fetch data and update the offcanvas content
+      fetch(`/get-data/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // Update the offcanvas content
+          document.getElementById("offcanvas-content").innerHTML = `
                       <p>${data.sum} ${data.date}gjfjhg</p>
                   `;
-              })
-           
-              .catch(error => console.error('Error fetching data:', error));
-              
-      });
+        })
+
+        .catch((error) => console.error("Error fetching data:", error));
+    });
   });
 });

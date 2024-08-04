@@ -1,19 +1,19 @@
 "use strict";
 
-var express = require('express');
+var express = require("express");
 
-var _require = require('pg'),
+var _require = require("pg"),
     Client = _require.Client;
 
-var path = require('path');
+var path = require("path");
 
-var expressLayouts = require('express-ejs-layouts');
+var expressLayouts = require("express-ejs-layouts");
 
-var ejs = require('ejs'); // Database Configuration
+var ejs = require("ejs"); // Database Configuration
 
 
 var client = new Client({
-  connectionString: 'postgres://default:w9UuYScFEy3M@ep-spring-dream-58410209.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require'
+  connectionString: "postgres://default:w9UuYScFEy3M@ep-spring-dream-58410209.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require"
 }); // Connect to Database
 
 (function _callee() {
@@ -26,14 +26,14 @@ var client = new Client({
           return regeneratorRuntime.awrap(client.connect());
 
         case 3:
-          console.log('Connected to PostgreSQL');
+          console.log("Connected to PostgreSQL");
           _context.next = 10;
           break;
 
         case 6:
           _context.prev = 6;
           _context.t0 = _context["catch"](0);
-          console.error('Database connection error:', _context.t0.stack);
+          console.error("Database connection error:", _context.t0.stack);
           process.exit(1); // Exit on database connection failure
 
         case 10:
@@ -45,21 +45,20 @@ var client = new Client({
 })(); // Express App Setup
 
 
-var app = express();
-var port = 3000; // Middleware
+var app = express(); // Middleware
 
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
-app.use(express["static"]('public')); // View Engine Setup
+app.use(express["static"]("public")); // View Engine Setup
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 app.use(expressLayouts);
-app.set('layout', 'layout'); // Routes
+app.set("layout", "layout"); // Routes
 
-app.get('/', function _callee2(req, res) {
+app.get("/", function _callee2(req, res) {
   var result, ordersHtml;
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
@@ -67,12 +66,12 @@ app.get('/', function _callee2(req, res) {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
-          return regeneratorRuntime.awrap(client.query('SELECT * FROM orders ORDER BY date DESC, id DESC LIMIT 10'));
+          return regeneratorRuntime.awrap(client.query("SELECT * FROM orders ORDER BY date DESC, id DESC LIMIT 10"));
 
         case 3:
           result = _context2.sent;
           _context2.next = 6;
-          return regeneratorRuntime.awrap(ejs.renderFile(path.join(__dirname, 'views', 'orders.ejs'), {
+          return regeneratorRuntime.awrap(ejs.renderFile(path.join(__dirname, "views", "orders.ejs"), {
             orders: result.rows
           }, {
             async: true
@@ -80,8 +79,8 @@ app.get('/', function _callee2(req, res) {
 
         case 6:
           ordersHtml = _context2.sent;
-          res.render('index', {
-            title: 'Orders',
+          res.render("index", {
+            title: "Orders",
             body: ordersHtml
           });
           _context2.next = 14;
@@ -90,8 +89,8 @@ app.get('/', function _callee2(req, res) {
         case 10:
           _context2.prev = 10;
           _context2.t0 = _context2["catch"](0);
-          console.error('Error fetching orders:', _context2.t0.stack);
-          res.status(500).send('Error fetching orders'); // Or render a custom error page
+          console.error("Error fetching orders:", _context2.t0.stack);
+          res.status(500).send("Error fetching orders"); // Or render a custom error page
 
         case 14:
         case "end":
@@ -100,7 +99,7 @@ app.get('/', function _callee2(req, res) {
     }
   }, null, null, [[0, 10]]);
 });
-app.get('/order/:id', function _callee3(req, res) {
+app.get("/order/:id", function _callee3(req, res) {
   var id, result;
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
@@ -109,7 +108,7 @@ app.get('/order/:id', function _callee3(req, res) {
           id = req.params.id;
           _context3.prev = 1;
           _context3.next = 4;
-          return regeneratorRuntime.awrap(client.query('SELECT * FROM orders WHERE id = $1', [id]));
+          return regeneratorRuntime.awrap(client.query("SELECT * FROM orders WHERE id = $1", [id]));
 
         case 4:
           result = _context3.sent;
@@ -119,10 +118,10 @@ app.get('/order/:id', function _callee3(req, res) {
             break;
           }
 
-          return _context3.abrupt("return", res.status(404).send('Order not found'));
+          return _context3.abrupt("return", res.status(404).send("Order not found"));
 
         case 7:
-          res.render('order', {
+          res.render("order", {
             title: "Order Details - ".concat(id),
             order: result.rows[0]
           });
@@ -132,8 +131,8 @@ app.get('/order/:id', function _callee3(req, res) {
         case 10:
           _context3.prev = 10;
           _context3.t0 = _context3["catch"](1);
-          console.error('Error fetching order details:', _context3.t0.stack);
-          res.status(500).send('Error fetching order details'); // Or render an error page
+          console.error("Error fetching order details:", _context3.t0.stack);
+          res.status(500).send("Error fetching order details"); // Or render an error page
 
         case 14:
         case "end":
@@ -141,8 +140,8 @@ app.get('/order/:id', function _callee3(req, res) {
       }
     }
   }, null, null, [[1, 10]]);
-}); // Start Server
-
+});
+var port = process.env.PORT || 3000;
 app.listen(port, function () {
-  console.log("Server is running on http://localhost:".concat(port));
+  console.log("Server running on port ".concat(port));
 });

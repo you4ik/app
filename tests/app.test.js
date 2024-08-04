@@ -1,24 +1,24 @@
-import app from '../app'
-import request from 'supertest'
+import app from "../app";
+import request from "supertest";
 
-describe('app', () => {
-  let server
+describe("app", () => {
+  let server;
 
   beforeEach(() => {
-    server = app.listen()
-  })
+    server = app.listen();
+  });
 
   afterEach(() => {
-    server.close()
-  })
+    server.close();
+  });
 
-  test('should start the server and listen on the specified port', async () => {
-    const response = await request(server).get('/')
-    expect(response.status).toBe(200)
-  })
+  test("should start the server and listen on the specified port", async () => {
+    const response = await request(server).get("/");
+    expect(response.status).toBe(200);
+  });
 
-  test('should return a 404 for non-existent routes', async () => {
-    const response = await request(server).get('/non-existent')
-    expect(response.status).toBe(404)
-  })
-})
+  test("should return a 404 for non-existent routes", async () => {
+    const response = await request(server).get("/non-existent");
+    expect(response.status).toBe(404);
+  });
+});
