@@ -4,7 +4,8 @@
   "description": "An Express.js app using EJS templates",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "nodemon": "nodemon app.js"
   },
   "keywords": [],
   "author": "",

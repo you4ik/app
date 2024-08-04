@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="taxify">
+    <meta name="keywords" content="taxify">
+    <meta name="author" content="taxify">
+    <link rel="manifest" href="manifest.json">
+    <title> - Taxify Driver App</title>
+
+    <!-- Google Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.5.1/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/iconsax.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Transition Styles -->
+    <style>
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.1s ease-out;
+        }
+        .fade-in {
+            opacity: 1;
+            transition: opacity 0.1s ease-in;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main content -->
+    <main id="main-content" class="fade-in">
+        <%- body %>
+    </main>
+
+    <!-- Bottom navbar starts -->
+    <div class="navbar-menu">
+        <ul>
+            <li>
+                <a href="/" id="nav-link">
+                    <div class="icon">
+                        <img class="unactive" src="/images/svg/home.svg" alt="home">
+                        <img class="active" src="/images/svg/home-fill.svg" alt="home">
+                    </div>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" id="nav-link">
+                    <div class="icon">
+                        <img class="unactive" src="/images/svg/driving.svg" alt="driving">
+                        <img class="active" src="/images/svg/driving-fill.svg" alt="driving">
+                    </div>
+                    <span>Active Ride</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" id="nav-link">
+                    <div class="icon">
+                        <img class="unactive" src="/images/svg/car.svg" alt="car">
+                        <img class="active" src="/images/svg/car-fill.svg" alt="car">
+                    </div>
+                    <span>My Rides</span>
+                </a>
+            </li>
+            <li>
+                <a href="setting.html">
+                    <div class="icon">
+                        <img class="unactive" src="/images/svg/setting.svg" alt="setting">
+                        <img class="active" src="/images/svg/setting-fill.svg" alt="setting">
+                    </div>
+                    <span>Setting</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Bottom navbar end -->
+
+    <!-- Scripts -->
+    <script src="/js/iconsax.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sticky-header.js"></script>
+    <script src="/js/template-setting.js"></script>
+    <script src="/js/script.js"></script>
+
+    <!-- AJAX Navigation Script with Transitions -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll("#nav-link");
+            const mainContent = document.getElementById("main-content");
+
+            function fadeOut(element, callback) {
+                element.classList.remove('fade-in');
+                element.classList.add('fade-out');
+                setTimeout(callback, 500); // Match the duration of CSS transition
+            }
+
+            function fadeIn(element) {
+                element.classList.remove('fade-out');
+                element.classList.add('fade-in');
+            }
+
+            links.forEach(link => {
+                link.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const url = this.getAttribute("href");
+
+                    fadeOut(mainContent, () => {
+                        fetch(url)
+                            .then(response => response.text())
+                            .then(html => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, "text/html");
+                                const newContent = doc.getElementById("main-content").innerHTML;
+
+                                mainContent.innerHTML = newContent;
+                                fadeIn(mainContent);
+                                history.pushState(null, "", url);
+                            })
+                            .catch(error => {
+                                console.error("Error loading page", error);
+                                fadeIn(mainContent); // Revert to previous state
+                            });
+                    });
+                });
+            });
+
+            window.addEventListener("popstate", function () {
+                location.reload();
+            });
+        });
+    </script>
+</body>
+</html>
