@@ -42,21 +42,24 @@ var client = new Client({
       }
     }
   }, null, null, [[0, 6]]);
-})(); // Express App Setup
-
+})();
 
 var app = express(); // Middleware
 
-app.use(express.json());
+app.use(express.json()); // Parse JSON bodies
+
 app.use(express.urlencoded({
   extended: true
-}));
-app.use(express["static"]("public")); // View Engine Setup
+})); // Parse URL-encoded bodies
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.use(express["static"](path.join(__dirname, 'public'))); // Serve static files
+// View Engine Setup
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
-app.set("layout", "layout"); // Routes
+app.set('layout', 'layout'); // Default layout
+// Routes
 
 app.get("/", function _callee2(req, res) {
   var result, ordersHtml;

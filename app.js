@@ -20,19 +20,18 @@ const client = new Client({
   }
 })();
 
-// Express App Setup
 const app = express();
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
 
 // View Engine Setup
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
-app.set("layout", "layout");
+app.set('layout', 'layout'); // Default layout
 
 // Routes
 app.get("/", async (req, res) => {
