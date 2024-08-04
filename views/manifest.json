@@ -1,0 +1,9 @@
+{
+  "name": "Orders App",
+  "short_name": "Orders",
+  "description": "A simple PWA for managing orders",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff"
+}

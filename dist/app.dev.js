@@ -141,7 +141,7 @@ app.get("/order/:id", function _callee3(req, res) {
     }
   }, null, null, [[1, 10]]);
 });
-var port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log("Server running on port ".concat(port));
+var PORT = process.env.PORT || 3001;
+app.listen(PORT, function () {
+  console.log("Server is running on port ".concat(PORT));
 });
