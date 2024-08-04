@@ -127,13 +127,13 @@ ${formatOrders(getOrders)}
 
 
 ***** TOTAL  *****
- - AMOUNT: ${totalItems(getOrders)}           
+ - AMOUNT: ${totalItems(getOrders)+2}           
  - SUMMA: ${totalSum(getOrders)},       
  - STOP: ${totalStop(getOrders)},         
 *****************
 
 **** BALANCE ****
- - SEK: ${totalSum(getOrders) - totalStop(getOrders) + 300}          
+ - SEK: ${totalSum(getOrders) - totalStop(getOrders)}          
  - USDT: 80            
  - EUR: 0              
 *****************
