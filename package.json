@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "nodemon": "nodemon app.js"
+    "nodemon": "webpack serve --mode development --open ",
+     "dev": "nodemon app.js --ignore public/ & browser-sync start --proxy 'localhost:3000' --files 'public/**/*.js, public/**/*.css, views/**/*.ejs'"
   },
   "keywords": [],
   "author": "",
@@ -14,9 +15,13 @@
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-ejs-layouts": "^2.5.1",
-    "pg": "^8.12.0"
+    "pg": "^8.12.0",
+    "swup": "^4.7.0"
   },
   "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.4",
     "prettier": "^3.3.3"
   }
 }

@@ -32,8 +32,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views")); // Убедитесь, что папка для шаблонов называется "views"
 app.use(expressLayouts);
-app.set("layout", "layout"); // Default layout
+app.set("layout", "index"); // Default layout
 
+
+// Repeat for other routes
 // Routes
 app.get("/", async (req, res) => {
   try {
@@ -45,12 +47,13 @@ app.get("/", async (req, res) => {
       { orders: result.rows },
       { async: true },
     );
-    res.render("index", { title: "Orders", body: ordersHtml });
+    res.render("index", { title: "Orders", body: ordersHtml});
   } catch (err) {
     console.error("Error fetching orders:", err.stack);
     res.status(500).send("Error fetching orders"); // Или отобразите страницу с ошибкой
   }
 });
+
 
 app.get("/order/:id", async (req, res) => {
   const { id } = req.params;
@@ -64,6 +67,7 @@ app.get("/order/:id", async (req, res) => {
     res.render("order", {
       title: `Order Details - ${id}`,
       order: result.rows[0],
+   
     });
   } catch (err) {
     console.error("Error fetching order details:", err.stack);

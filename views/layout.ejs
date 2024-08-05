@@ -6,7 +6,7 @@
     <meta name="description" content="taxify">
     <meta name="keywords" content="taxify">
     <meta name="author" content="taxify">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <title> - Taxify Driver App</title>
 
     <!-- Google Fonts and Icons -->
@@ -51,7 +51,7 @@
                 </a>
             </li>
             <li>
-                <a href="/" id="nav-link">
+                <a href="/active-ride" id="nav-link">
                     <div class="icon">
                         <img class="unactive" src="/images/svg/driving.svg" alt="driving">
                         <img class="active" src="/images/svg/driving-fill.svg" alt="driving">
@@ -60,7 +60,7 @@
                 </a>
             </li>
             <li>
-                <a href="/" id="nav-link">
+                <a href="/my-rides" id="nav-link">
                     <div class="icon">
                         <img class="unactive" src="/images/svg/car.svg" alt="car">
                         <img class="active" src="/images/svg/car-fill.svg" alt="car">
@@ -69,7 +69,7 @@
                 </a>
             </li>
             <li>
-                <a href="setting.html">
+                <a href="/setting" id="nav-link">
                     <div class="icon">
                         <img class="unactive" src="/images/svg/setting.svg" alt="setting">
                         <img class="active" src="/images/svg/setting-fill.svg" alt="setting">
@@ -87,53 +87,35 @@
     <script src="/js/sticky-header.js"></script>
     <script src="/js/template-setting.js"></script>
     <script src="/js/script.js"></script>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const cache = {};
 
-    <!-- AJAX Navigation Script with Transitions -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const links = document.querySelectorAll("#nav-link");
-            const mainContent = document.getElementById("main-content");
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('mouseover', function() {
+      const url = this.getAttribute('href');
+      if (!cache[url]) {
+        fetch(url)
+          .then(response => response.text())
+          .then(html => {
+            cache[url] = html;
+          })
+          .catch(error => console.error('Preloading error:', error));
+      }
+    });
 
-            function fadeOut(element, callback) {
-                element.classList.remove('fade-in');
-                element.classList.add('fade-out');
-                setTimeout(callback, 500); // Match the duration of CSS transition
-            }
-
-            function fadeIn(element) {
-                element.classList.remove('fade-out');
-                element.classList.add('fade-in');
-            }
-
-            links.forEach(link => {
-                link.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    const url = this.getAttribute("href");
-
-                    fadeOut(mainContent, () => {
-                        fetch(url)
-                            .then(response => response.text())
-                            .then(html => {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, "text/html");
-                                const newContent = doc.getElementById("main-content").innerHTML;
-
-                                mainContent.innerHTML = newContent;
-                                fadeIn(mainContent);
-                                history.pushState(null, "", url);
-                            })
-                            .catch(error => {
-                                console.error("Error loading page", error);
-                                fadeIn(mainContent); // Revert to previous state
-                            });
-                    });
-                });
-            });
-
-            window.addEventListener("popstate", function () {
-                location.reload();
-            });
-        });
-    </script>
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const url = this.getAttribute('href');
+      if (cache[url]) {
+        document.body.innerHTML = cache[url];
+        history.pushState(null, '', url);
+      } else {
+        window.location.href = url;
+      }
+    });
+  });
+});</script>
+   
 </body>
 </html>

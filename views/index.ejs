@@ -6,7 +6,7 @@
     <meta name="description" content="taxify">
     <meta name="keywords" content="taxify">
     <meta name="author" content="taxify">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <title> - Taxify Driver App</title>
 
     <!-- Google Fonts and Icons -->
@@ -20,21 +20,44 @@
 
     <!-- Transition Styles -->
     <style>
-        .fade-out {
-            opacity: 0;
-            transition: opacity 0.1s ease-out;
-        }
-        .fade-in {
-            opacity: 1;
-            transition: opacity 0.1s ease-in;
-        }
+.transition-fade {
+  transition: 0.2s;
+  opacity: 1;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0;
+}
     </style>
 </head>
 
 <body>
+        <!-- header starts -->
+        <header id="header" class="main-header inner-page-header">
+            <div class="custom-container">
+                <div class="header-panel">
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="#offcanvasLeft" data-bs-toggle="offcanvas">
+                            <i class="iconsax icon-btn" data-icon="text-align-left"></i>
+                        </a>
+                        <img class="img-fluid logo" src="/images/logo/logo.png" alt="logo">
+                        <img class="img-fluid logo-dark" src="/images/logo/logo-dark.png" alt="logo"> </div>
+    
+                    <div class="d-flex align-items-center gap-sm-3 gap-2">
+                        <a href="/#">
+                            <i class="iconsax icon-btn" data-icon="bell-2"> </i>
+                        </a>
+    
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header end -->
 
     <!-- Main content -->
-    <main id="main-content" class="fade-in">
+
+      
+    <main  id="swup" class="transition-fade">
         <%- body %>
     </main>
 
@@ -80,60 +103,106 @@
         </ul>
     </div>
     <!-- Bottom navbar end -->
+     <!-- sidebar starts -->
+    <div class="offcanvas sidebar-offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft">
+        <div class="offcanvas-header sidebar-header">
+            <div class="sidebar-logo">
+                <img class="img-fluid logo" src="../assets/images/logo/logo.png" alt="logo">
+                <img class="img-fluid logo-dark" src="../assets/images/logo/logo-dark.png" alt="logo"> </div>
+        </div>
+        <div class="offcanvas-body">
+            <a href="profile-setting.html" class="profile-part d-flex align-items-center gap-2">
+                <img class="img-fluid profile-pic" src="../assets/images/profile/p8.png" alt="p8">
+                <div>
+                    <h3>Jonathan Higgins</h3>
+                    <span>Edit Account</span>
+                </div>
+            </a>
+            <ul class="link-section switch-section">
+                <li class="active">
+                    <a href="home.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="home-2"> </i>
+                        <h3>Home</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="my-rides.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="car"> </i>
+                        <h3>My Ride</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="notification.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="bell-2"> </i>
+                        <h3>Notification</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="setting.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="user-1"> </i>
+                        <h3>Setting</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="page-listing.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="book-closed"> </i>
+                        <h3>Template Pages</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../elements/elements-page.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="document-text-1"> </i>
+                        <h3> Template Elements</h3>
+                    </a>
+                </li>
+
+
+                <li>
+                    <div class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="repeat"> </i>
+                        <h3>RTL</h3>
+                    </div>
+                    <div class="switch-btn">
+                        <input id="dir-switch" type="checkbox">
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="brush-3"> </i>
+                        <h3>Dark</h3>
+                    </div>
+                    <div class="switch-btn">
+                        <input id="dark-switch" type="checkbox">
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="bottom-sidebar">
+                <a href="login.html" class="pages">
+                    <i class="iconsax sidebar-icon" data-icon="logout-2"> </i>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end -->
 
     <!-- Scripts -->
+    <script type="module">
+        import Swup from 'https://unpkg.com/swup@4?module';
+        const swup = new Swup();
+      </script>
     <script src="/js/iconsax.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/sticky-header.js"></script>
     <script src="/js/template-setting.js"></script>
     <script src="/js/script.js"></script>
+    
+   
 
-    <!-- AJAX Navigation Script with Transitions -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const links = document.querySelectorAll("#nav-link");
-            const mainContent = document.getElementById("main-content");
-
-            function fadeOut(element, callback) {
-                element.classList.remove('fade-in');
-                element.classList.add('fade-out');
-                setTimeout(callback, 500); // Match the duration of CSS transition
-            }
-
-            function fadeIn(element) {
-                element.classList.remove('fade-out');
-                element.classList.add('fade-in');
-            }
-
-            links.forEach(link => {
-                link.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    const url = this.getAttribute("href");
-
-                    fadeOut(mainContent, () => {
-                        fetch(url)
-                            .then(response => response.text())
-                            .then(html => {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, "text/html");
-                                const newContent = doc.getElementById("main-content").innerHTML;
-
-                                mainContent.innerHTML = newContent;
-                                fadeIn(mainContent);
-                                history.pushState(null, "", url);
-                            })
-                            .catch(error => {
-                                console.error("Error loading page", error);
-                                fadeIn(mainContent); // Revert to previous state
-                            });
-                    });
-                });
-            });
-
-            window.addEventListener("popstate", function () {
-                location.reload();
-            });
-        });
-    </script>
 </body>
 </html>
