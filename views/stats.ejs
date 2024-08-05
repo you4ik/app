@@ -1,0 +1,102 @@
+<!-- earning section starts -->
+<section>
+    <div class="custom-container">
+        <div class="balance-background">
+            <div class="balance-details">
+                <div>
+                    <h6>Balance</h6>
+                    <h4 class="mt-2">   
+                         <% Object.entries(stats.total_sums).forEach(([currency, sum]) => { %>
+                        <p>
+                            <%= currency %>:
+                            <%= sum %>
+                        </p>
+                        <% }); %></h4>
+                </div>
+                <img src="../assets/images/svg/earning-vecter.svg"
+                    alt="earning-vecter">
+            </div>
+        </div>
+
+        <ul class="total-ride-list p-0">
+            <li>
+                <a href="my-rides.html" class="ride-box">
+                    <h4>16</h4>
+                    <div
+                        class="d-flex align-items-center justify-content-between gap-1">
+                        <h6 class="d-flex flex-wrap">Complete Ride</h6>
+                        <i class="iconsax arrow-icon" data-icon="arrow-right">
+                        </i>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="my-rides.html" class="ride-box">
+                    <h4>02</h4>
+                    <div
+                        class="d-flex align-items-center justify-content-between gap-1">
+                        <h6 class="d-flex flex-wrap">Pending Ride</h6>
+                        <i class="iconsax arrow-icon" data-icon="arrow-right">
+                        </i>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="my-rides.html" class="ride-box">
+                    <h4>04</h4>
+                    <div
+                        class="d-flex align-items-center justify-content-between gap-1">
+                        <h6 class="d-flex flex-wrap">Cancel Ride</h6>
+                        <i class="iconsax arrow-icon" data-icon="arrow-right">
+                        </i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- earning section end -->
+
+
+<h1>Order Statistics</h1>
+
+<div>
+    <h2>Summary</h2>
+    <p>Total Orders:
+        <%= stats.order_count %>
+    </p>
+    <p>Total MIN Sold:
+        <%= stats.min_sold %>
+    </p>
+
+    <h3>Total Sums by Currency:</h3>
+    <% Object.entries(stats.total_sums).forEach(([currency, sum]) => { %>
+    <p>
+        <%= currency %>:
+        <%= sum %>
+    </p>
+    <% }); %>
+</div>
+
+<div>
+    <h2>Filters</h2>
+    <form action="/stats" method="GET">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+
+        <label for="item_type">Item Type:</label>
+        <select id="item_type" name="item_type">
+            <option value="">All</option>
+            <option value="MIN">MIN</option>
+            <option value="BAN">BAN</option>
+            <option value="BOM">BOM</option>
+            <option value="AP">AP</option>
+        </select>
+
+        <button type="submit">Apply Filters</button>
+    </form>
+</div>

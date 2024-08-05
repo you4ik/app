@@ -1,0 +1,189 @@
+<header id="header" class="main-header">
+    <div class="custom-container">
+        <div class="header-panel">
+            <a href="/purchases">
+                <i class="iconsax icon-btn" data-icon="chevron-left"></i>
+            </a>
+            <img class="img-fluid logo" src="/images/logo/logo.png" alt="logo">
+            <img class="img-fluid logo-dark" src="/images/logo/logo-dark.png" alt="logo">
+        </div>
+    </div>
+</header>
+<style>
+    .btn-check {
+  position: absolute;
+  clip: rect(0,0,0,0);
+  pointer-events: none;
+
+}
+
+.btn-check:checked + .btn-outline-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+</style>
+<section class="section-b-space pt-0">
+
+    <div class="rider-options box-background pt-3 pb-3">
+        <div class="custom-container">
+            <h3 class="fw-medium title-color">Select Option</h3>
+            <ul class="nav nav-pills ride-tab outstation-ride-tab w-100" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <div class="nav-link " id="bike" data-bs-toggle="tab" style="text-align: center;" data-bs-target="#bike-pane" aria-selected="false" role="tab" tabindex="-1">
+                        <i class="fi fi-sr-truck-arrow-right fs-1"></i>
+                        <h6 class="text-center">Drop</h6>
+                    </div>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <div class="nav-link" id="car-tab" data-bs-toggle="tab" data-bs-target="#car-tab-pane" aria-selected="false" role="tab" tabindex="-1">
+                        <img class="img-fluid vehicle-img" src="../assets/images/svg/parcel-img.svg" alt="parcel">
+                        <h6 class="text-center">Pick-up</h6>
+                    </div>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <div class="nav-link active" id="auto-tab" data-bs-toggle="tab" data-bs-target="#auto-tab-pane" aria-selected="true" role="tab">
+                        <img class="img-fluid vehicle-img" src="../assets/images/svg/freight-img.svg" alt="freight">
+                        <h6 class="text-center">Freight</h6>
+                    </div>
+                </li>
+            </ul>
+
+            <p class="price-content w-100">Minimum price for this fare is <span class="title-color fw-semibold">$80</span> per ride. you can bid your price below.
+            </p>
+        </div>
+    </div>
+    <div class="auth-content-bg">
+        <div class="custom-container">
+            <form class="auth-form auth-form mt-0 mb-3" action="/purchases" method="POST">
+                <div class="row">
+                 
+                  
+                        <div class="form-group mt-0">
+                            <label class="form-label fw-semibold">Select Vendor</label>
+                            <div class="btn-group w-100" role="group" aria-label="Vendor selection">
+                                <% vendors.forEach((vendor, index) => { %>
+                                    <input type="radio" class="btn-check" name="vendor_id" id="vendor<%= vendor.id %>" value="<%= vendor.id %>" autocomplete="off" required <%= index === 0 ? 'checked' : '' %>>
+                                    <label class="btn btn-dark" for="vendor<%= vendor.id %>"><%= vendor.name %></label>
+                                <% }); %>
+                            </div>
+                        </div>
+                   
+                    
+                    
+          
+                        <div class="form-group mt-0">
+                            <label class="form-label fw-semibold">Select Driver</label>
+                            <div class="btn-group w-100" role="group" aria-label="Driver selection">
+                                <% drivers.forEach((driver, index) => { %>
+                                    <input type="radio" class="btn-check" name="driver" id="driver<%= driver.id %>" value="<%= driver.name %>" autocomplete="off" required <%= index === 0 ? 'checked' : '' %>>
+                                    <label class="btn btn-dark" for="driver<%= driver.id %>"><%= driver.name %></label>
+                                <% }); %>
+                            </div>
+                        </div>          
+                
+            
+                        <div class="form-group mt-3 row">
+                            <label class="form-label fw-semibold">Delivery Cost</label>
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                <input type="radio" class="btn-check" name="delivery_cost" id="cost300" value="300" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="cost300">300</label>
+                    
+                                <input type="radio" class="btn-check" name="delivery_cost" id="cost500" value="500" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="cost500">500</label>
+                    
+                                <input type="radio" class="btn-check" name="delivery_cost" id="cost1000" value="1000" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="cost1000">1000</label>
+                    
+                                <input type="radio" class="btn-check" name="delivery_cost" id="cost0" value="0" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="cost0">0</label>
+                    
+                                <input type="number" name="custom_delivery_cost" class="form-control" style="width:auto" placeholder="Custom">
+                            </div>
+                        </div>
+                  
+                    
+                    
+                    
+                </div>
+                <div class="form-group mt-3">
+                    <label class="form-label mb-2" for="InputComments">Comments</label>
+                    <textarea class="form-control" id="InputComments" placeholder="Enter comments" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="datepicker" class="form-label fw-semibold">Select Date</label>
+                    <input type="date" class="form-control" id="datepicker" name="date" value="" required>
+                </div>
+                <h5 class="fw-semibold title-color mt-3 mb-2">Items</h5>
+               <div class="row g-2">
+                <div id="items" class="col-md-6">
+                    <div class="input-group">
+                        <input type="number" step="0.01" name="price" class="form-control" placeholder="Enter price" required>
+                        <div class="input-group-append">
+                            <div class="btn-group" role="group">
+                                <input type="checkbox" class="btn-check" id="currencyUSD" name="currency" value="USD" autocomplete="off">
+                                <label class="btn btn-dark" for="currencyUSD">AP</label>
+                                
+                                <input type="checkbox" class="btn-check" id="currencyEUR" name="currency" value="EUR" autocomplete="off">
+                                <label class="btn btn-dark" for="currencyEUR">MIN</label>
+                            
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                    <div id="items"  class="col-md-6">
+                        <div class="input-group">
+                    <input type="number" step="0.01" name="price" class="form-control" placeholder="Enter price" required>
+                        <div class="input-group-append">
+                            <div class="btn-group" role="group">
+                                <input type="checkbox" class="btn-check" id="currencyUSD" name="currency" value="SEK" autocomplete="off" checked>
+                                <label class="btn btn btn-dark" for="currencyUSD">USD</label>
+                                
+                                <input type="checkbox" class="btn-check" id="currencyEUR" name="currency" value="EUR" autocomplete="off">
+                                <label class="btn btn-dark" for="currencyEUR">EUR</label>
+                            </div>
+                        </div></div>
+                    <!-- Items will be added here dynamically -->
+                </div>
+                </div>
+                <button type="button" onclick="addItem()" class="btn btn-primary mt-3">Add Item</button>
+            </form>
+        </div>
+    </div>
+    <div class="fixed-btn">
+        <div class="custom-container">
+            <button type="submit" class="btn theme-btn w-100">Create Purchase</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    let itemCount = 0;
+    function addItem() {
+        const itemsDiv = document.getElementById('items');
+        const newItem = document.createElement('div');
+        newItem.className = 'row mt-2';
+        newItem.innerHTML = `
+            <div class="col-6">
+                <input type="text" name="items[${itemCount}][type]" placeholder="Item Type" required class="form-control">
+            </div>
+    
+            <div class="col-6 mt-2">
+                <input type="number" step="0.01" name="items[${itemCount}][price]" placeholder="Price" required class="form-control">
+            </div>
+            <div class="col-6 mt-2">
+                <input type="text" name="items[${itemCount}][currency]" placeholder="Currency" required class="form-control">
+            </div>
+        `;
+        itemsDiv.appendChild(newItem);
+        itemCount++;
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById('datepicker').value = today;
+    });
+</script>

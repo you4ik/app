@@ -1,0 +1,20 @@
+<h1>Purchases</h1>
+<% purchases.forEach(purchase => { %>
+    <div>
+        <h2>Purchase #<%= purchase.id %></h2>
+        <p>Vendor: <%= purchase.vendor_name %></p>
+        <p>Date: <%= purchase.date %></p>
+        <p>Driver: <%= purchase.driver %></p>
+        <p>Delivery Cost: <%= purchase.delivery_cost %></p>
+        <h3>Items:</h3>
+        <% JSON.parse(purchase.items).forEach(item => { %>
+            <p><%= item.type %>: <%= item.quantity %> x <%= item.price %> <%= item.currency %></p>
+        <% }) %>
+        <h3>Total Cost:</h3>
+        <% Object.entries(JSON.parse(purchase.total_cost)).forEach(([currency, cost]) => { %>
+            <p><%= currency %>: <%= cost %></p>
+        <% }) %>
+    </div>
+<% }) %>
+
+<a href="/add-purchase" class="btn btn-primary">Add New Purchase</a>

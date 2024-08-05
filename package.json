@@ -4,15 +4,15 @@
   "description": "An Express.js app using EJS templates",
   "main": "app.js",
   "scripts": {
-  "start": "concurrently \"npm run serve\" \"npm run sync\"",
-  "serve": "nodemon",
-  "sync": "browser-sync start --config browser-sync-config.js"
-},
-
+    "start": "concurrently \"npm run serve\" \"npm run sync\"",
+    "serve": "nodemon",
+    "sync": "browser-sync start --config browser-sync-config.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@shagital/db-dumper": "^1.0.2",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-ejs-layouts": "^2.5.1",
