@@ -4,10 +4,11 @@
   "description": "An Express.js app using EJS templates",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "nodemon": "webpack serve --mode development --open ",
-     "dev": "nodemon app.js --ignore public/ & browser-sync start --proxy 'localhost:3000' --files 'public/**/*.js, public/**/*.css, views/**/*.ejs'"
-  },
+  "start": "concurrently \"npm run serve\" \"npm run sync\"",
+  "serve": "nodemon",
+  "sync": "browser-sync start --config browser-sync-config.js"
+},
+
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,8 +20,10 @@
     "swup": "^4.7.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.8.0",
     "browser-sync": "^3.0.2",
     "concurrently": "^8.2.2",
+    "globals": "^15.9.0",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3"
   }

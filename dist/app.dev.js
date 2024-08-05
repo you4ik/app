@@ -143,6 +143,12 @@ app.get("/order/:id", function _callee3(req, res) {
     }
   }, null, null, [[1, 10]]);
 });
+app.use(function (req, res, next) {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
 var PORT = process.env.PORT || 3000; // Start Server
 
 app.listen(PORT, function () {

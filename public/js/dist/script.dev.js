@@ -22,7 +22,6 @@ window.onload = function () {
  Ratio js
 =======================*/
 
-
 window.addEventListener("load", function () {
   var bgImg = document.querySelectorAll(".bg-img");
 
@@ -52,6 +51,12 @@ window.addEventListener("load", function () {
     bgImgEl.parentNode.classList.add("bg-size");
     var bgSrc = bgImgEl.src;
     bgImgEl.style.display = "none";
-    bgImgEl.parentNode.setAttribute("style", "\n      background-image: url(".concat(bgSrc, ");\n      background-size:cover;\n      background-position: center;\n      background-repeat: no-repeat;\n      display: block;\n      "));
+    bgImgEl.parentNode.setAttribute(
+      "style",
+      "\n      background-image: url(".concat(
+        bgSrc,
+        ");\n      background-size:cover;\n      background-position: center;\n      background-repeat: no-repeat;\n      display: block;\n      ",
+      ),
+    );
   }
 });

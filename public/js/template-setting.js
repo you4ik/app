@@ -30,7 +30,6 @@ dirSwitch?.addEventListener("change", (e) => {
   }
 });
 
-
 /*====================
   Dark js
  ======================*/
