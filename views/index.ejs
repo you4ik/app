@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="taxify">
+    <meta name="keywords" content="taxify">
+    <meta name="author" content="taxify">
+    <link rel="manifest" href="/manifest.json">
+    <title> - Taxify Driver App</title>
+
+    <!-- Google Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.5.1/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/iconsax.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Transition Styles -->
+    <style>
+.transition-fade {
+  transition: 0.2s;
+  opacity: 1;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+    </style>
+</head>
+
+<body>
+        <!-- header starts -->
+        <header id="header" class="main-header inner-page-header">
+            <div class="custom-container">
+                <div class="header-panel">
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="#offcanvasLeft" data-bs-toggle="offcanvas">
+                            <i class="iconsax icon-btn" data-icon="text-align-left"></i>
+                        </a>
+                        <img class="img-fluid logo" src="/images/logo/logo.png" alt="logo">
+                        <img class="img-fluid logo-dark" src="/images/logo/logo-dark.png" alt="logo"> </div>
+    
+                    <div class="d-flex align-items-center gap-sm-3 gap-2">
+                        <a href="/#">
+                            <i class="iconsax icon-btn" data-icon="bell-2"> </i>
+                        </a>
+    
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header end -->
+
+    <!-- Main content -->
+
+      
+    <main  id="swup" class="transition-fade">
+        <%- body %>
+    </main>
+
+    <!-- Bottom navbar starts -->
+    <div class="navbar-menu">
+        <ul>
+            <li>
+                <a href="/" id="nav-link">
+                    <div class="icon">
+                        <img class="unactive" src="/images/svg/home.svg" alt="home">
+                        <img class="active" src="/images/svg/home-fill.svg" alt="home">
+                    </div>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" id="nav-link">
+                    <div class="icon">
+                        <img class="unactive" src="/images/svg/driving.svg" alt="driving">
+                        <img class="active" src="/images/svg/driving-fill.svg" alt="driving">
+                    </div>
+                    <span>Active Ride</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" id="nav-link">
+                    <div class="icon">
+                        <img class="unactive" src="/images/svg/car.svg" alt="car">
+                        <img class="active" src="/images/svg/car-fill.svg" alt="car">
+                    </div>
+                    <span>My Rides</span>
+                </a>
+            </li>
+            <li>
+                <a href="setting.html">
+                    <div class="icon">
+                        <img class="unactive" src="/images/svg/setting.svg" alt="setting">
+                        <img class="active" src="/images/svg/setting-fill.svg" alt="setting">
+                    </div>
+                    <span>Setting</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Bottom navbar end -->
+     <!-- sidebar starts -->
+    <div class="offcanvas sidebar-offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft">
+        <div class="offcanvas-header sidebar-header">
+            <div class="sidebar-logo">
+                <img class="img-fluid logo" src="../assets/images/logo/logo.png" alt="logo">
+                <img class="img-fluid logo-dark" src="../assets/images/logo/logo-dark.png" alt="logo"> </div>
+        </div>
+        <div class="offcanvas-body">
+            <a href="profile-setting.html" class="profile-part d-flex align-items-center gap-2">
+                <img class="img-fluid profile-pic" src="../assets/images/profile/p8.png" alt="p8">
+                <div>
+                    <h3>Jonathan Higgins</h3>
+                    <span>Edit Account</span>
+                </div>
+            </a>
+            <ul class="link-section switch-section">
+                <li class="active">
+                    <a href="home.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="home-2"> </i>
+                        <h3>Home</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="my-rides.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="car"> </i>
+                        <h3>My Ride</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="notification.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="bell-2"> </i>
+                        <h3>Notification</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="setting.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="user-1"> </i>
+                        <h3>Setting</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="page-listing.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="book-closed"> </i>
+                        <h3>Template Pages</h3>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../elements/elements-page.html" class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="document-text-1"> </i>
+                        <h3> Template Elements</h3>
+                    </a>
+                </li>
+
+
+     
+
+                <li>
+                    <div class="pages">
+                        <i class="iconsax sidebar-icon" data-icon="brush-3"> </i>
+                        <h3>Dark</h3>
+                    </div>
+                    <div class="switch-btn">
+                        <input id="dark-switch" type="checkbox">
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="bottom-sidebar">
+                <a href="login.html" class="pages">
+                    <i class="iconsax sidebar-icon" data-icon="logout-2"> </i>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- Scripts -->
+    <script type="module">
+        import Swup from 'https://unpkg.com/swup@4?module';
+        const swup = new Swup();
+      </script>
+    <script src="/js/iconsax.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sticky-header.js"></script>
+    <script src="/js/template-setting.js"></script>
+    <script src="/js/script.js"></script>
+    
+   
+    <script id="__bs_script__">//<![CDATA[
+        (function() {
+          try {
+            var script = document.createElement('script');
+            if ('async') {
+              script.async = true;
+            }
+            script.src = 'http://HOST:3001/browser-sync/browser-sync-client.js?v=3.0.2'.replace("HOST", location.hostname);
+            if (document.body) {
+              document.body.appendChild(script);
+            } else if (document.head) {
+              document.head.appendChild(script);
+            }
+          } catch (e) {
+            console.error("Browsersync: could not append script tag", e);
+          }
+        })()
+      //]]></script>
+</body>
+</html>

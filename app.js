@@ -9,6 +9,7 @@ const client = new Client({
   connectionString:
     "postgres://default:w9UuYScFEy3M@ep-spring-dream-58410209.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require",
 });
+
 // Connect to Database
 (async () => {
   try {
@@ -23,16 +24,17 @@ const client = new Client({
 const app = express();
 
 // Middleware
-app.use(express.json()); // Parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
-app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
 // View Engine Setup
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views")); // Убедитесь, что папка для шаблонов называется "views"
 app.use(expressLayouts);
-app.set('layout', 'layout'); // Default layout
+app.set("layout", "index"); // Default layout
 
+// Repeat for other routes
 // Routes
 app.get("/", async (req, res) => {
   try {
@@ -47,7 +49,7 @@ app.get("/", async (req, res) => {
     res.render("index", { title: "Orders", body: ordersHtml });
   } catch (err) {
     console.error("Error fetching orders:", err.stack);
-    res.status(500).send("Error fetching orders"); // Or render a custom error page
+    res.status(500).send("Error fetching orders"); // Или отобразите страницу с ошибкой
   }
 });
 
@@ -58,7 +60,7 @@ app.get("/order/:id", async (req, res) => {
       id,
     ]);
     if (result.rows.length === 0) {
-      return res.status(404).send("Order not found"); // Or render a 404 page
+      return res.status(404).send("Order not found"); // Или отобразите страницу 404
     }
     res.render("order", {
       title: `Order Details - ${id}`,
@@ -66,12 +68,18 @@ app.get("/order/:id", async (req, res) => {
     });
   } catch (err) {
     console.error("Error fetching order details:", err.stack);
-    res.status(500).send("Error fetching order details"); // Or render an error page
+    res.status(500).send("Error fetching order details"); // Или отобразите страницу с ошибкой
   }
 });
-
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
 });
 
+const PORT = process.env.PORT || 3000;
+// Start Server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

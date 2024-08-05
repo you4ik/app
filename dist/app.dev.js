@@ -46,19 +46,18 @@ var client = new Client({
 
 var app = express(); // Middleware
 
-app.use(express.json()); // Parse JSON bodies
-
+app.use(express.json());
 app.use(express.urlencoded({
   extended: true
-})); // Parse URL-encoded bodies
+}));
+app.use(express["static"](path.join(__dirname, "public"))); // View Engine Setup
 
-app.use(express["static"](path.join(__dirname, 'public'))); // Serve static files
-// View Engine Setup
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views")); // Убедитесь, что папка для шаблонов называется "views"
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
-app.set('layout', 'layout'); // Default layout
+app.set("layout", "index"); // Default layout
+// Repeat for other routes
 // Routes
 
 app.get("/", function _callee2(req, res) {
@@ -93,7 +92,7 @@ app.get("/", function _callee2(req, res) {
           _context2.prev = 10;
           _context2.t0 = _context2["catch"](0);
           console.error("Error fetching orders:", _context2.t0.stack);
-          res.status(500).send("Error fetching orders"); // Or render a custom error page
+          res.status(500).send("Error fetching orders"); // Или отобразите страницу с ошибкой
 
         case 14:
         case "end":
@@ -135,7 +134,7 @@ app.get("/order/:id", function _callee3(req, res) {
           _context3.prev = 10;
           _context3.t0 = _context3["catch"](1);
           console.error("Error fetching order details:", _context3.t0.stack);
-          res.status(500).send("Error fetching order details"); // Or render an error page
+          res.status(500).send("Error fetching order details"); // Или отобразите страницу с ошибкой
 
         case 14:
         case "end":
@@ -144,7 +143,14 @@ app.get("/order/:id", function _callee3(req, res) {
     }
   }, null, null, [[1, 10]]);
 });
-var PORT = process.env.PORT || 3001;
+app.use(function (req, res, next) {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
+var PORT = process.env.PORT || 3000; // Start Server
+
 app.listen(PORT, function () {
-  console.log("Server is running on port ".concat(PORT));
+  console.log("Server is running on http://localhost:".concat(PORT));
 });

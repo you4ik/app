@@ -1,15 +1,4 @@
- <!-- header starts -->
-    <header id="header" class="main-header inner-page-header">
-        <div class="custom-container">
-            <div class="header-panel">
-                <a href="setting.html">
-                    <i class="iconsax icon-btn" data-icon="chevron-left"> </i>
-                </a>
-                <h3>My kjbk</h3>
-            </div>
-        </div>
-    </header>
-    <!-- header end -->
+
 
     <!-- wallet section starts -->
     <section class="section-b-space">
@@ -38,7 +27,7 @@
                     <ul class="earning-list">
                         <% orders.forEach(order => { %>
                        <li  data-id="<%= order.id %>">
-                        <a href="/order/<%= order.id %>" style="text-decoration: none; color: inherit;">
+                        <a href="/order/<%= order.id %>" class="ajax-link" style="text-decoration: none; color: inherit;">
                             <div class="earning-box">
                                <i class="fi fi-sr-square-<%= order.kol %> fs-1 mt-1" ></i>
                                 <div class="earning-content">
