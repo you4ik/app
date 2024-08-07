@@ -1,24 +1,32 @@
 {
-  "sqltools.connections": [
-    {
-      "pgOptions": {
-        "ssl": {
-          "rejectUnauthorized": true
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "lk",
+            "connectString": "postgres://default:w9UuYScFEy3M@ep-spring-dream-58410209.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require"
         }
-      },
-      "previewLimit": 50,
-      "server": "localhost",
-      "driver": "PostgreSQL",
-      "name": "lk",
-      "connectString": "postgres://default:w9UuYScFEy3M@ep-spring-dream-58410209.eu-central-1.aws.neon.tech:5432/verceldb?sslmode=require"
-    }
-  ],
-  "workbench.editor.enablePreviewFromCodeNavigation": true,
-  "livePreview.customExternalBrowser": "Default",
-  "livePreview.debugOnExternalPreview": true,
-  "livePreview.openPreviewTarget": "Embedded Preview",
-  "compile-hero.disable-compile-files-on-did-save-code": false,
-  "git.ignoreLimitWarning": true,
-  "editor.formatOnSave": true,
-  "prettier.requireConfig": true
+    ],
+    "files.associations": {
+        // extension name : html
+        "*.ejs": "html",
+        "*.js": "html"
+    },
+    "emmet.includeLanguages": {
+        "ejs": "html"
+    },
+    "workbench.editor.enablePreviewFromCodeNavigation": true,
+    "livePreview.customExternalBrowser": "Default",
+    "livePreview.debugOnExternalPreview": true,
+    "livePreview.openPreviewTarget": "Embedded Preview",
+    "compile-hero.disable-compile-files-on-did-save-code": false,
+    "git.ignoreLimitWarning": true,
+    "editor.formatOnSave": true,
+    "prettier.requireConfig": true
 }
