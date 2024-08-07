@@ -7,8 +7,8 @@
     "start": "concurrently \"npm run serve\" \"npm run sync\"",
     "serve": "nodemon",
     "sync": "browser-sync start --config browser-sync-config.js",
-     "lint": "eslint .",
-  "lint:fix": "eslint . --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
