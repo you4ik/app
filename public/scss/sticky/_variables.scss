@@ -2,7 +2,7 @@
 $font-main-size: 13px;
 $font-main-line: 26px !important;
 $font-main-color: #6c6c6c;
-$font-main-family: 'Roboto', sans-serif;
+$font-main-family: "Roboto", sans-serif;
 
 $font-h1-size: 24px;
 $font-h1-line: 30px;
@@ -16,7 +16,7 @@ $font-h5-size: 16px;
 $font-h5-line: 22px;
 $font-heading-color: #1f1f1f;
 $font-heading-weight: 700;
-$font-heading-family: 'Source Sans Pro', sans-serif;
+$font-heading-family: "Source Sans Pro", sans-serif;
 
 //Line Heights*/
 $line-height-xs: 14px;
@@ -84,8 +84,8 @@ $shadow-s: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
 $shadow-m: 0 2px 14px 0 rgba(0, 0, 0, 0.08);
 $shadow-l: 0 5px 15px 0 rgba(0, 0, 0, 0.09);
 $shadow-xl:
-    0 5px 30px 0 rgba(0, 0, 0, 0.11),
-    0 5px 15px 0 rgba(0, 0, 0, 0.08);
+  0 5px 30px 0 rgba(0, 0, 0, 0.11),
+  0 5px 15px 0 rgba(0, 0, 0, 0.08);
 
 //Dark Mode Main Colors*/
 $color_transparent: rgba(0, 0, 0, 0);
@@ -116,5 +116,5 @@ $globalTransitions: all 350ms ease;
 .fa-rotate-180,
 .fa-rotate-90,
 [data-bs-toggle] i {
-    transition: $globalTransitions;
+  transition: $globalTransitions;
 }

@@ -1,52 +1,52 @@
 {
-    "name": "express-ejs-app",
-    "version": "1.0.0",
-    "description": "An Express.js app using EJS templates",
-    "main": "app.js",
-    "scripts": {
-        "start": "concurrently \"npm run serve\" \"npm run sync\"",
-        "serve": "nodemon",
-        "sync": "browser-sync start --config browser-sync-config.js",
-        "lint": "eslint .",
-        "lint:fix": "eslint . --fix",
-        "sass": "node-sass public/scss -o public/css",
-        "format": "prettier --write ."
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "@shagital/db-dumper": "^1.0.2",
-        "bootstrap": "^5.3.3",
-        "ejs": "^3.1.10",
-        "express": "^4.19.2",
-        "express-ejs-layouts": "^2.5.1",
-        "node-sass": "^9.0.0",
-        "pg": "^8.12.0",
-        "sass": "^1.77.8",
-        "swup": "^4.7.0",
-        "workbox-cli": "^7.1.0"
-    },
-    "devDependencies": {
-        "@eslint/js": "^9.8.0",
-        "browser-sync": "^3.0.2",
-        "concurrently": "^8.2.2",
-        "eslint": "^9.8.0",
-        "globals": "^15.9.0",
-        "husky": "^9.1.4",
-        "lint-staged": "^15.2.8",
-        "nodemon": "^3.1.4",
-        "prettier": "^3.3.3"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.js": [
-            "prettier --write",
-            "git add"
-        ]
+  "name": "express-ejs-app",
+  "version": "1.0.0",
+  "description": "An Express.js app using EJS templates",
+  "main": "app.js",
+  "scripts": {
+    "start": "concurrently \"npm run serve\" \"npm run sync\"",
+    "serve": "nodemon",
+    "sync": "browser-sync start --config browser-sync-config.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "sass": "node-sass public/scss -o public/css",
+    "format": "prettier --write ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@shagital/db-dumper": "^1.0.2",
+    "bootstrap": "^5.3.3",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
+    "node-sass": "^9.0.0",
+    "pg": "^8.12.0",
+    "sass": "^1.77.8",
+    "swup": "^4.7.0",
+    "workbox-cli": "^7.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "browser-sync": "^3.0.2",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.8.0",
+    "globals": "^15.9.0",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.8",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  }
 }

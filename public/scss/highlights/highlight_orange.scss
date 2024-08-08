@@ -4,21 +4,21 @@ $colorHighlightLight: #fc6e51;
 $colorHighlightDark: #e9573f;
 
 .color-highlight {
-    color: $colorHighlightDark !important;
+  color: $colorHighlightDark !important;
 }
 .bg-highlight {
-    background-color: $colorHighlightDark !important;
-    color: #fff !important;
+  background-color: $colorHighlightDark !important;
+  color: #fff !important;
 }
 .border-highlight {
-    border-color: $colorHighlightDark !important;
+  border-color: $colorHighlightDark !important;
 }
 .gradient-highlight {
-    background-image: linear-gradient(
-        to bottom,
-        $colorHighlightLight,
-        $colorHighlightDark
-    ) !important;
+  background-image: linear-gradient(
+    to bottom,
+    $colorHighlightLight,
+    $colorHighlightDark
+  ) !important;
 }
 
 //.form-control:focus,
@@ -27,30 +27,30 @@ $colorHighlightDark: #e9573f;
 .footer-bar-5 strong,
 .footer-bar-4 strong,
 .splide__pagination__page.is-active {
-    background-color: $colorHighlightDark !important;
+  background-color: $colorHighlightDark !important;
 }
 .footer-bar-1 .active-nav i,
 .footer-bar-1 .active-nav span,
 .footer-bar-3 .active-nav i {
-    color: $colorHighlightDark !important;
+  color: $colorHighlightDark !important;
 }
 .form-floating-over > .form-control:focus ~ label {
-    color: $colorHighlightDark;
+  color: $colorHighlightDark;
 }
 .form-floating-over > .form-control:not(:placeholder-shown) ~ label {
-    color: $colorHighlightDark;
+  color: $colorHighlightDark;
 }
 .form-floating-over > .form-select ~ label {
-    color: $colorHighlightDark;
+  color: $colorHighlightDark;
 }
 .color-highlight {
-    color: $colorHighlightDark;
+  color: $colorHighlightDark;
 }
 .bg-highlight {
-    background-color: $colorHighlightDark;
-    color: #fff !important;
+  background-color: $colorHighlightDark;
+  color: #fff !important;
 }
 .interest-check input:checked ~ label {
-    color: #fff !important;
-    background-color: $colorHighlightDark !important;
+  color: #fff !important;
+  background-color: $colorHighlightDark !important;
 }
